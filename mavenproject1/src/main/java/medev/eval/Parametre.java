@@ -69,4 +69,9 @@ public class Parametre {
             e.printStackTrace();
         }
     }
+
+    public int getNbErreurMax() {
+        return nbErreurMax;
+    }
+    
 }
