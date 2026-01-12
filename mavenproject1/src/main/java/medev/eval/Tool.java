@@ -5,6 +5,7 @@
 package medev.eval;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -106,13 +107,27 @@ public class Tool {
         }
     }
     public void MAJ(){
-        char propal;
-        do{
-            System.out.println("Veuillez entrer une lettre que vous n'avez pas encore entré");
-            propal='a';//Entrée à insérer ici
+        boolean continuer=true;
+        while(continuer){
+        char propal;//proposition lettre
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Veuillez entrer votre lettre : ");
+        String lettreStr = scanner.nextLine();
+        if (!lettreStr.isEmpty()){
+            propal= lettreStr.charAt(0);
+            this.lettres.proposer(propal,mot);
         }
-        while(lettres.getEssais().contains(propal));
-        if(mot.possede(propal)){
+        
+        if(this.erreur>=this.param.getErreurMax()){
+            continuer=false;
+            System.out.println("Vous avez perdu");
         }
-    }
+        else{
+            if(this.mot.getReel()==this.mot.getActuel()){
+                continuer=false;
+                System.out.println("Bravo, vous avez gagné");
+            }
+        }
+        }
 }
