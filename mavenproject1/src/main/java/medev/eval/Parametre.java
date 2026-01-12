@@ -49,9 +49,8 @@ public class Parametre {
             if (!probleme) {
                 this.dictionaire.add(mot);
             }
-
         } else {
-            System.out.println("ce mot existe déjà");//NO SONAR
+            System.out.println("ce mot existe déjà");
         }
     }
 
@@ -63,7 +62,7 @@ public class Parametre {
         if (this.dictionaire.contains(mot)) {
             this.dictionaire.remove(mot);
         } else {
-            System.out.println("ce mot n'existe pas dans la liste");//NO SONAR
+            System.out.println("ce mot n'existe pas dans la liste");
         }
     }
 
@@ -77,7 +76,7 @@ public class Parametre {
             String mot;
             while ((mot = br.readLine()) != null) {
                 if (mot.contains(" ")) {
-                    System.out.println("il ne doit y avoir qu'un seul mot par ligne");//NO SONAR
+                    System.out.println("il ne doit y avoir qu'un seul mot par ligne");
                 } else {
                     ajouterMot(mot);
                 }
@@ -94,6 +93,30 @@ public class Parametre {
      */
     public void erreurMax(int n) {
         this.nbErreurMax = min(9, max(4, n));
+    }
+
+    public List<String> getDictionaire() {
+        return dictionaire;
+    }
+
+    public void setDictionaire(List<String> dictionaire) {
+        this.dictionaire = dictionaire;
+    }
+
+    public int getNbErreurMax() {
+        return nbErreurMax;
+    }
+
+    public void setNbErreurMax(int nbErreurMax) {
+        this.nbErreurMax = nbErreurMax;
+    }
+
+    public int getNbJoueur() {
+        return nbJoueur;
+    }
+
+    public void setNbJoueur(int nbJoueur) {
+        this.nbJoueur = nbJoueur;
     }
     
     
