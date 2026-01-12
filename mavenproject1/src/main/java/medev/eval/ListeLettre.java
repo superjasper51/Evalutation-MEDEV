@@ -20,24 +20,20 @@ public class ListeLettre {
         this.essais=new ArrayList<>(24);
     }
     
-    public void proposer(String lettre, Mot mot){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Tapez un caractère : ");//NO SONAR
-        String c = scanner.nextLine();
-        boolean test=false;
-        for(char character :alphabet)
-            if (character==c){
-                test=true;
-                break;
-        }
-        if (!test){
+    
+    public void proposer(char lettre, Mot mot){
+        if (!alphabet.contains(lettre)){
             System.out.println("Ceci n'est pas un caractère valide");//NO SONAR
             proposer(lettre,mot);
         }
         else{
-            
-        }
-        System.out.println("La chaîne d'entrée utilisateur est : " + c);   
+            if (essais.contains(lettre)){
+                System.out.println("Vous avez déjà demandé cette lettre");//NO SONAR
+            }
+            else{
+                essais.add(lettre);            
+                        }
+        }  
     }
     
 }
