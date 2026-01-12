@@ -59,6 +59,7 @@ public class Parametre {
      * @param mot qui doit faire partie du dictionaire
      */
     public void supprimerMot(String mot) {
+        mot=mot.toLowerCase();
         if (this.dictionaire.contains(mot)) {
             this.dictionaire.remove(mot);
         } else {
