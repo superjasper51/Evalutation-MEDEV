@@ -9,5 +9,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>25</maven.compiler.release>
         <exec.mainClass>medev.eval.Mavenproject1</exec.mainClass>
+        <sonar.organization>superjasper51</sonar.organization>
     </properties>
 </project>
