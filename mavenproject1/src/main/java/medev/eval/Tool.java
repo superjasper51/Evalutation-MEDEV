@@ -4,7 +4,10 @@
  */
 package medev.eval;
 
+import static java.lang.Math.random;
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -17,7 +20,7 @@ public class Tool {
     Parametre param;
     ArrayList<ArrayList<Character>> dessin;
     
-    public Tool(ListeLettre lettres, Mot mot){
+    public Tool(Mot mot){
         this.lettres=new ListeLettre();
         this.mot=mot;
         this.erreur=0;
@@ -36,11 +39,8 @@ public class Tool {
     }
     
     
-    public boolean verifier(Character c){
-        return lettres.contains(c);
-    }
     public void afficher(){
-        System.out.println("Les lettres déjà proposées sont :"+lettres.afficher());
+        System.out.println("Les lettres déjà proposées sont :"+lettres.getEssais());
         this.afficheDessin();
         System.out.println(mot.getActuel());
     }
@@ -85,27 +85,64 @@ public class Tool {
             ligne2.set(1,'0');
             dessin.set(4,ligne2);
         }
-        if(erreur>=4 && param.nbErreurMax*erreur/9>=5){
+        if(erreur>=4 && param.getNbErreurMax()*erreur/9>=5){
             ligne3.set(1,'|');
             ligne4.set(1,'|');
             dessin.set(6,ligne3);
             dessin.set(8,ligne4);
         }
-        if(erreur>=4 && param.nbErreurMax*erreur/9>=6){
+        if(erreur>=4 && param.getNbErreurMax()*erreur/9>=6){
             ligne3.set(0,'/');
             dessin.set(6,ligne3);
         }
-        if(erreur>=4 && param.nbErreurMax*erreur/9>=7){
+        if(erreur>=4 && param.getNbErreurMax()*erreur/9>=7){
             ligne3.set(2,'\\');
             dessin.set(6,ligne3);
         }
-        if(erreur>=4 && param.nbErreurMax*erreur/9>=9){
+        if(erreur>=4 && param.getNbErreurMax()*erreur/9>=9){
             ligne5.set(2,'\\');
             dessin.set(10,ligne5);
         }
-        if(erreur>=4 && param.nbErreurMax*erreur/9>=8){
+        if(erreur>=4 && param.getNbErreurMax()*erreur/9>=8){
             ligne5.set(0,'/');
             dessin.set(10,ligne5);
         }
     }
+    public void MAJ(){
+        boolean continuer=true;
+        while(continuer){
+        char propal;//proposition lettre
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Veuillez entrer votre lettre : ");
+        String lettreStr = scanner.nextLine();
+        if (!lettreStr.isEmpty()){
+            propal= lettreStr.charAt(0);
+            this.lettres.proposer(propal,mot);
+        }
+        
+        if(this.erreur>=this.param.getErreurMax()){
+            continuer=false;
+            System.out.println("Vous avez perdu");
+        }
+        else{
+            if(this.mot.getReel()==this.mot.getActuel()){
+                continuer=false;
+                System.out.println("Bravo, vous avez gagné");
+            }
+        }
+        }
+    }
+
+    /**
+     *
+     * @return un mot du dictionaire
+     */
+    public static String indice(){
+            int n=lettres.getDictionaire().size();
+            Random random=new Random();
+            int indice;
+            indice = random.nextInt(n);
+            return lettres.getDictionaire().index(indice);
+        }
 }
