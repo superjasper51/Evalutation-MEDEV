@@ -20,6 +20,7 @@ public class Parametre {
 
     private List<String> dictionaire;
     private int nbErreurMax;
+    int nbJoueur;
     
     /**
      * constructeur par défaut de Parametre
@@ -27,6 +28,7 @@ public class Parametre {
     public Parametre() {
         this.dictionaire = new ArrayList<>(List.of("chat", "chien"));
         nbErreurMax = 7;
+        nbJoueur=1;
     }
 
     /**
@@ -93,4 +95,6 @@ public class Parametre {
     public void erreurMax(int n) {
         this.nbErreurMax = min(9, max(4, n));
     }
+    
+    
 }
