@@ -17,7 +17,7 @@ public class Tool {
     int erreur;
     ListeLettre lettres;
     Mot mot;
-    Parametre param;
+    static Parametre param;
     ArrayList<ArrayList<Character>> dessin;
     
     public Tool(Mot mot){
@@ -121,7 +121,7 @@ public class Tool {
             this.lettres.proposer(propal,mot);
         }
         
-        if(this.erreur>=this.param.getErreurMax()){
+        if(this.erreur>=this.param.getNbErreurMax()){
             continuer=false;
             System.out.println("Vous avez perdu");
         }
@@ -139,10 +139,10 @@ public class Tool {
      * @return un mot du dictionaire
      */
     public static String indice(){
-            int n=lettres.getDictionaire().size();
+            var n=param.getDictionaire().size();
             Random random=new Random();
             int indice;
             indice = random.nextInt(n);
-            return lettres.getDictionaire().index(indice);
+            return param.getDictionaire().get(indice);
         }
 }
