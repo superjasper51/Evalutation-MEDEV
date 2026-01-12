@@ -22,8 +22,8 @@ public class MotTest {
     @BeforeEach
     public void creation() {
         Mot mot=new Mot("arbre");
-        assert "arbre".equals(mot.reel);
-        assert "_ _ _ _ _".equals(mot.actuel);
+        assert "arbre".equals(mot.getReel());
+        assert "_ _ _ _ _ ".equals(mot.getActuel());
     }
     
     @BeforeAll
