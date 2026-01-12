@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="testAnt" default="build" basedir=".">
+    <property name="src.location" location="src/main/"/>
+    <property name="classes.location" location="build/classes"/>
+    <property name="classes.doc" location="build/doc"/>
+    <description>This is a simple test project.</description>
+    <target name="checkDependencies"
+            description="Check if dependencies are satisfied">
+        
+        <echo message="Source directory is ${src.location}"/>
+        <echo message="Classes directory is ${classes.location}"/>
+        <condition property="src.available">
+            <and>
+                <available file="${src.location}" type="dir"/>
+                <available file="${classes.location}" type="dir"/>
+            </and>
+        </condition>
+    </target>
+    
+    
+    <target name="build" description="Build the application"
+            depends="checkDependencies" if="src.available">
+        <echo message="Building application..."/>
+        <javac srcdir="${src.location}" destdir="${classes.location}"
+               includeAntRuntime="false" release="17"/>
+        <echo message="Done!"/>
+    </target>
+    
+    
+    <target name="jar" description="Build jar for the application"
+            depends="checkDependencies" if="src.available">
+        <echo message="Building application..."/>
+        <jar destfile="build/test.jar" basedir="${classes.location}">
+            <manifest>
+                <attribute name="Main-Class" value="medev.eval.Mavenproject1"/>
+            </manifest>
+        </jar>
+        <echo message="Done!"/>
+    </target>
+    
+    
+    
+    <target name="javadoc" description="génération de la javadoc">
+        <javadoc sourcepath="${src.location}"
+                 destdir="${classes.doc}" >
+            <fileset dir="${src.location}" defaultexcludes="yes">
+                <include name="**" />
+            </fileset>
+        </javadoc>
+    </target>
+  
+  
+  <!--
+    <property name="output.dir" value="${basedir}/build"/>
+    <property name="src.test.dir" value="${basedir}/src/test"/>
+    <property name="build.classes.dir" value="${output.dir}/classes"/>
+
+    <target name="init">
+        <mkdir dir="${output.dir}"/>
+    </target>
+
+    <path id="junit.platform.libs.classpath">
+        <fileset dir="${basedir}/src/lib/junit-platform/"/>
+    </path>
+
+    <path id="junit.engine.jupiter.classpath">
+        <fileset dir="${basedir}/src/lib/jupiter/"/>
+    </path>
+
+    <target name="compile-test" depends="init">
+        <mkdir dir="${build.classes.dir}"/>
+        <javac srcdir="${src.test.dir}"
+               destdir="${build.classes.dir}">-->
+            <!-- our tests only need JUnit Jupiter engine
+            libraries in our compile classpath for the tests --><!--
+            <classpath refid="junit.engine.jupiter.classpath"/>
+        </javac>
+    </target>
+    <target name="test" depends="compile-test">
+        <junitlauncher>-->
+            <!-- include the JUnit platform related libraries
+            required to run the tests --><!--
+            <classpath refid="junit.platform.libs.classpath"/>
+-->
+            <!-- include the JUnit Jupiter engine libraries --><!--
+            <classpath refid="junit.engine.jupiter.classpath"/>
+
+            <classpath>-->
+                <!-- the test classes themselves --><!--
+                <pathelement location="${build.classes.dir}"/>
+            </classpath>
+            <testclasses outputdir="${output.dir}">
+                <fileset dir="${build.classes.dir}"/>
+                <listener type="legacy-brief" sendSysOut="true"/>
+                <listener type="legacy-xml" sendSysErr="true" sendSysOut="true"/>
+
+            </testclasses>
+        </junitlauncher>
+    </target>-->
+       <path id="test.classpath">
+        <pathelement path="build/test"/>
+        <pathelement path="build/main"/>
+        <fileset dir="${ant.home}/lib" includes="*.jar" />
+    </path>
+    
+     <!-- https://junit.org/junit5/docs/snapshot/user-guide/#running-tests-build-ant -->
+    <target name="test.junit.launcher" depends="build">
+        <junitlauncher haltOnFailure="true" printSummary="true">
+            <classpath refid="test.classpath"/>
+            <testclasses outputdir="build/test-report">
+                <fileset dir="build/test">
+                    <include name="**/*Tests.class"/>
+                </fileset>
+                <listener type="legacy-xml" sendSysOut="true" sendSysErr="true"/>
+                <listener type="legacy-plain" sendSysOut="true" />
+            </testclasses>
+        </junitlauncher>
+    </target>
+
+    <!-- https://junit.org/junit5/docs/current/user-guide/#running-tests-console-launcher -->
+    <target name="test.console.launcher" depends="build">
+        <java classpathref="test.classpath" classname="org.junit.platform.console.ConsoleLauncher" fork="true" failonerror="true">
+            <arg value="--scan-classpath"/>
+            <arg line="--reports-dir build/test-report"/>
+        </java>
+        <junitreport todir="build/test-report">
+            <fileset dir="build/test-report">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="build/test-report/html"/>
+        </junitreport>
+    </target>
+
+    <target name="test" depends="test.junit.launcher, test.console.launcher" />
+</project>
