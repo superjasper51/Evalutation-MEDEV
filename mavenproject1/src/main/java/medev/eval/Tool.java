@@ -105,4 +105,14 @@ public class Tool {
             dessin.set(10,ligne5);
         }
     }
+    public void MAJ(){
+        char propal;
+        do{
+            System.out.println("Veuillez entrer une lettre que vous n'avez pas encore entré");
+            propal='a';//Entrée à insérer ici
+        }
+        while(lettres.getEssais().contains(propal));
+        if(mot.possede(propal)){
+        }
+    }
 }
