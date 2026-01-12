@@ -11,6 +11,8 @@ package medev.eval;
 public class Mavenproject1 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Mot mot=new Mot("Arbre");
+        Tool tool=new Tool(mot);
+        tool.MAJ();
     }
 }
