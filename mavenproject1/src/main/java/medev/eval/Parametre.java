@@ -48,7 +48,7 @@ public class Parametre {
         try (BufferedReader br = new BufferedReader(new FileReader(fichier))) {
             String mot;
             boolean probleme=false;
-            int i=0;
+            int i;
             while ((mot = br.readLine()) != null) {
                 i=0;
                 mot=mot.toLowerCase();
