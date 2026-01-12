@@ -6,17 +6,15 @@ package medev.eval;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  *
  * @author nathan
  */
 public class ListeLettre {
-    private final ArrayList<Character> alphabet;
+    private final static ArrayList<Character> alphabet=new ArrayList<>(List.of('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'));
     private final ArrayList<Character> essais;
     public ListeLettre(){
-        this.alphabet=new ArrayList<>(List.of('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'));
         this.essais=new ArrayList<>(24);
     }
     
@@ -34,6 +32,14 @@ public class ListeLettre {
                 essais.add(lettre);            
                         }
         }  
+    }
+
+    public static ArrayList<Character> getAlphabet() {
+        return alphabet;
+    }
+
+    public ArrayList<Character> getEssais() {
+        return essais;
     }
     
 }
