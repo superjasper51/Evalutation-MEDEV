@@ -36,11 +36,8 @@ public class Tool {
     }
     
     
-    public boolean verifier(Character c){
-        return lettres.contains(c);
-    }
     public void afficher(){
-        System.out.println("Les lettres déjà proposées sont :"+lettres.afficher());
+        System.out.println("Les lettres déjà proposées sont :"+lettres.getEssais());
         this.afficheDessin();
         System.out.println(mot.getActuel());
     }
@@ -85,25 +82,25 @@ public class Tool {
             ligne2.set(1,'0');
             dessin.set(4,ligne2);
         }
-        if(erreur>=4 && param.nbErreurMax*erreur/9>=5){
+        if(erreur>=4 && param.getNbErreurMax()*erreur/9>=5){
             ligne3.set(1,'|');
             ligne4.set(1,'|');
             dessin.set(6,ligne3);
             dessin.set(8,ligne4);
         }
-        if(erreur>=4 && param.nbErreurMax*erreur/9>=6){
+        if(erreur>=4 && param.getNbErreurMax()*erreur/9>=6){
             ligne3.set(0,'/');
             dessin.set(6,ligne3);
         }
-        if(erreur>=4 && param.nbErreurMax*erreur/9>=7){
+        if(erreur>=4 && param.getNbErreurMax()*erreur/9>=7){
             ligne3.set(2,'\\');
             dessin.set(6,ligne3);
         }
-        if(erreur>=4 && param.nbErreurMax*erreur/9>=9){
+        if(erreur>=4 && param.getNbErreurMax()*erreur/9>=9){
             ligne5.set(2,'\\');
             dessin.set(10,ligne5);
         }
-        if(erreur>=4 && param.nbErreurMax*erreur/9>=8){
+        if(erreur>=4 && param.getNbErreurMax()*erreur/9>=8){
             ligne5.set(0,'/');
             dessin.set(10,ligne5);
         }
