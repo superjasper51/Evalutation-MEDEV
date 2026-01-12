@@ -15,6 +15,7 @@ public class Mot {
     private ArrayList<Character> reel;
     private List<Character> actuel;
     public Mot(String mot){
+        mot = mot.toUpperCase();
         reel=new ArrayList<Character>();
         actuel=new ArrayList<Character>();
         for(int i=0; i<mot.length(); i++){
@@ -24,7 +25,7 @@ public class Mot {
     }
     
     public void majMotActuel(char c, int place){
-        actuel.set(place,c);
+        actuel.set(place,c);//L'affichage affichera la lettre entrée, y compris si celle-ci est en majuscule (mais ce n'est aps sensible à la casse pour le mot pour autant)
     }
 
     public String getReel() {
@@ -49,5 +50,10 @@ public class Mot {
             mot=mot+a+" ";
         }
         return mot;
+    }
+    public boolean possede(Character c){
+        String ch=c.toString();
+        c= ch.toUpperCase().charAt(0);
+        return reel.contains(c);
     }
 }
