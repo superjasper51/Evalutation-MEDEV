@@ -34,9 +34,9 @@ jobs:
         working-directory : mavenproject1 # Indique que les commandes doivent
 # s ’ executer dans ce dossier
         env:
-          GITHUB \ _TOKEN : ${{ secrets . GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar\
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
                 -Dsonar.projectKey=superjasper51_Evalutation-MEDEV\
-                -Dsonar.java.binaries=target/classes\
-                -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+                #-Dsonar.java.binaries=target/classes\
+                #-Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+
