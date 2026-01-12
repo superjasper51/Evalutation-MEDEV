@@ -4,7 +4,9 @@
  */
 package medev.eval;
 
+import static java.lang.Math.random;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -18,7 +20,7 @@ public class Tool {
     Parametre param;
     ArrayList<ArrayList<Character>> dessin;
     
-    public Tool(ListeLettre lettres, Mot mot){
+    public Tool(Mot mot){
         this.lettres=new ListeLettre();
         this.mot=mot;
         this.erreur=0;
@@ -129,5 +131,18 @@ public class Tool {
                 System.out.println("Bravo, vous avez gagné");
             }
         }
+        }
+    }
+
+    /**
+     *
+     * @return un mot du dictionaire
+     */
+    public static String indice(){
+            int n=lettres.getDictionaire().size();
+            Random random=new Random();
+            int indice;
+            indice = random.nextInt(n);
+            return lettres.getDictionaire().index(indice);
         }
 }
