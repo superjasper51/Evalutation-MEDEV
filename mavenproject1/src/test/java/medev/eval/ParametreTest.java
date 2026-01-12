@@ -17,22 +17,22 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author nathan
  */
 public class ParametreTest {
-    
+
     public ParametreTest() {
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
     }
-    
+
     @BeforeEach
     public void setUp() {
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
@@ -43,7 +43,7 @@ public class ParametreTest {
     @Test
     public void testAjouterMot() {
         System.out.println("ajouterMot");
-        ArrayList<String> mots=new ArrayList<>();
+        ArrayList<String> mots = new ArrayList<>();
         mots.add("Tortue");
         mots.add("A");
         mots.add("");
@@ -52,11 +52,13 @@ public class ParametreTest {
         mots.add("o o");
         mots.add("O_O");
         Parametre instance = new Parametre();
-        for (String mot:mots){
-        instance.ajouterMot(mot);}
+        for (String mot : mots) {
+            instance.ajouterMot(mot);
+        }
         // TODO review the generated test code and remove the default call to fail.
-        if(!(instance.getDictionaire().size()==3)){
-            fail("ça n'a pas fonctionné");}
+        if (!(instance.getDictionaire().size() == 3)) {
+            fail("ça n'a pas fonctionné");
+        }
     }
 
     /**
@@ -68,10 +70,19 @@ public class ParametreTest {
         String mot = "chat";
         Parametre instance = new Parametre();
         instance.supprimerMot(mot);
-        if ()
-        mot="Tortue";
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        if (!(instance.getDictionaire().size() == 1)) {
+            fail("ça n'a pas fonctionné");
+        }
+        mot = "Tortue";
+        instance.supprimerMot(mot);
+        if (!(instance.getDictionaire().size() == 1)) {
+            fail("ça n'a pas fonctionné");
+        }
+        mot = "CHIEN";
+        instance.supprimerMot(mot);
+        if (!instance.getDictionaire().isEmpty()) {
+            fail("ça n'a pas fonctionné");
+        }
     }
 
     /**
@@ -84,8 +95,9 @@ public class ParametreTest {
         Parametre instance = new Parametre();
         instance.chargerDictionnaire(fichier);
         // TODO review the generated test code and remove the default call to fail.
-        if()
-        fail("The test case is a prototype.");
+        if (!instance.getDictionaire().isEmpty()) {
+            fail("ça n'a pas fonctionné");
+        }
     }
 
     /**
@@ -97,8 +109,19 @@ public class ParametreTest {
         int n = 0;
         Parametre instance = new Parametre();
         instance.erreurMax(n);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        if (instance.getNbErreurMax() != 4) {
+            fail("Erreur");
+        }
+        n = 10;
+        instance.erreurMax(n);
+        if (instance.getNbErreurMax() != 9) {
+            fail("Erreur");
+        }
+        n = 7;
+        instance.erreurMax(n);
+        if (instance.getNbErreurMax() != 7) {
+            fail("Erreur");
+        }
     }
-    
+
 }
